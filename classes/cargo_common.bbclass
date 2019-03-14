@@ -35,14 +35,6 @@ cargo_common_do_configure () {
 	directory = "${CARGO_HOME}/bitbake"
 	EOF
 
-	if [ "${EXTERNALSRC}" == "" ]; then
-		cat <<- EOF >> ${CARGO_HOME}/config
-		[source.crates-io]
-		replace-with = "bitbake"
-		local-registry = "/nonexistant"
-		EOF
-	fi
-
 	echo "[target.${HOST_SYS}]" >> ${CARGO_HOME}/config
 	echo "linker = '${RUST_TARGET_CCLD}'" >> ${CARGO_HOME}/config
 	if [ "${HOST_SYS}" != "${BUILD_SYS}" ]; then
